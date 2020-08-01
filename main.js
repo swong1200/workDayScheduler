@@ -1,9 +1,8 @@
 var nine = $("#nine")
 
 function appointment () {
-    nine.text = ""
     var p = $("<p>")
-    p.text("")
+    p.text("hello world")
     nine.append(p)
 }
 appointment()
