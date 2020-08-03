@@ -29,10 +29,11 @@ for (var i = 0; i < timeSlot.length; i++) {
   // Input Section of row
   var input = $("<input>");
   input.addClass("col-lg-9 hour");
-  input.attr("data-value", timeSlot[i])
+  input.attr("data-value", timeSlot[i]);
   // Button section of row
   var btn = $("<button>");
   btn.addClass("col-sm-1 saveBtn");
+  btn.attr("data-value", timeSlot[i])
   btn.text("Save");
   // Add sections to row
   newRow.append(timeBlock);
@@ -45,10 +46,26 @@ for (var i = 0; i < timeSlot.length; i++) {
 
 function rowColor() {
   var hourCurrent = moment().format("hA");
-  var current = input.attr("data-value")
-  console.log(current)
-  if (hourCurrent === current) {
-    input.addClass("present");
+  var current = $("input").attr("data-value")
+  var allRows = $("input")
+  if (hourCurrent > current) {
+    allRows.addClass("past");
+  } else if (hourCurrent < current){
+    allRows.addClass("future")
+  } else {
+    allRows.addClass("present")
   }
 }
 rowColor()
+
+$("button").click(function(event) {
+  event.preventDefault();
+
+  var appointment = input.text;
+  var inputData = input.attr("data-value");
+  var buttonData = btn.attr("data-value");
+
+  if (inputData === buttonData){
+    localStorage.setItem("input", appointment)
+  }
+});
