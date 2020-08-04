@@ -1,25 +1,18 @@
 # workDayScheduler
 
-Make a header with the title plus a date that changes to reflect the current date
-- title will be an h1
-- maybe a simple motto describing what the planner does
-- an h3 or a p that changes according to the day(How do I code it so that the day changes?)
+Goal: to create a web application that a user can update hour to hour for the work day
 
-The planner itself will be a grid with 9 different rows (Use Bootstrap)
+The planner itself will be a grid with 9 different rows 
+- at the top of the page, the user will see the current date and day
 - there will be 9 rows delineating hours from 9am to 5pm
+- the user will be able to input their appointments into each row
 - the past hours will have the standard grey background
 - the current hour will have a red color
 - the future hours will have a green color
-- a button on the side of each hour will allow you to save an appointment to local storage 
-user writes inside input - made this an input; THIS WORKS
-user presses button on side - hover class from css shows you can click this; trying to add functionality right now:
+- a button on the side of each hour will allow you to save an appointment 
 
-1. I need to refer to the data value of both the button and the input
-2. If the two match, the button click will save what was typed to local storage
+I wanted to create an app that used Local Storage to save multiple key:value pairs.  This proved troublesome at first, but I was able to eventually save each different input to Local Storage.  Refreshing the page will not erase the user's saved data from the screen to ensure complete functionality.  Overall, this was a challenge but an enjoyable exercise.
 
-don't allow the form to update
-the input will be added to the field and saved
-if the user types something in the field the text will disappear but it won't be erased until the user pushes the button
+Here is a link to my [deployed app](https://swong1200.github.io/workDayScheduler/).
 
-
-- each row is a field input that you can type in when you click on it
+![](Images/2020-08-04%20(2).png)

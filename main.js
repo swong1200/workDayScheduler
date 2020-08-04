@@ -22,14 +22,14 @@ var dataHour = ["9", "10", "11", "12", "13", "14", "15", "16", "17"];
 
 // Build the schedule by row
 for (var i = 0; i < timeSlot.length; i++) {
-  var storedInput = localStorage.getItem(timeSlot[i])
-  console.log(timeSlot[i])
+  // Get local storage on load
+  var storedInput = localStorage.getItem(timeSlot[i]);
+  // Create the row
   var newRow = $("<div>");
   newRow.addClass("row");
-  // newRow.attr("data-compare", dataHour[i])
-  var hourCurrent = parseInt(moment().format("H"))
-  var numbers = parseInt(dataHour[i])
-  
+  // Turn the hours into number values
+  var hourCurrent = parseInt(moment().format("H"));
+  var numbers = parseInt(dataHour[i]);
   // Time section of row
   var timeBlock = $("<div>");
   timeBlock.addClass("col-sm-1 hour time-block");
@@ -38,29 +38,29 @@ for (var i = 0; i < timeSlot.length; i++) {
   var input = $("<input>");
   input.addClass("col-lg-10");
   input.attr("data-value", timeSlot[i]);
-  input.attr("data-hour", timeSlot[i])
-  input.attr("id", timeSlot[i])
-  input.val(storedInput)
+  input.attr("data-hour", timeSlot[i]);
+  // Puts the stored text into the rows
+  input.val(storedInput);
+  // Changes the color of the rows according to the time
   if (hourCurrent > numbers) {
-    input.addClass("past")
+    input.addClass("past");
   } else if (hourCurrent === numbers) {
-    input.addClass("present")
+    input.addClass("present");
   } else {
-    input.addClass("future")
+    input.addClass("future");
   }
-  
   // Button section of row
   var btn = $("<button>", {
     type: "button",
     value: timeSlot[i],
+    // Sets an onclick event to save data to local storage then pla
     on: {
       click: function saveToLocal() {
         var el = $("input[data-value='" + this.value + "']");
-        var selectedHour = el.data("hour")
+        var selectedHour = el.data("hour");
         if (el) {
           var inputText = el.val();
           localStorage.setItem(selectedHour, inputText);
-          saveToScreen();
         }
       },
     },
@@ -76,17 +76,4 @@ for (var i = 0; i < timeSlot.length; i++) {
   btn.append(font);
   // Add row to schedule
   schedule.append(newRow);
-}
-  
-  
-  var hourId = $("#timeSlot[i]")
-  console.log(hourCurrent)
-
-function saveToScreen() {
-  var storedAppt = localStorage.getItem("appt");
-
-  if (input !== null  && storedAppt == input) {
-    console.log(storedAppt)
-    input.html(storedAppt)
-  }
 }
