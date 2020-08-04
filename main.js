@@ -1,3 +1,5 @@
+var test = localStorage.getItem("appt");
+
 // Moment JS to show day
 var now = moment().format("dddd, MMMM Do");
 var currentDay = $("#currentDay");
@@ -46,10 +48,14 @@ for (var i = 0; i < timeSlot.length; i++) {
     },
   });
   btn.addClass("col-sm-1 saveBtn");
+  // Adding i tags for font awesome
+  var font = $("<i>")
+  font.addClass("fas fa-save")
   // Add sections to row
   newRow.append(timeBlock);
   newRow.append(input);
   newRow.append(btn);
+  btn.append(font)
   // Add row to schedule
   schedule.append(newRow);
 }
@@ -69,12 +75,13 @@ function rowColor() {
 rowColor();
 
 
-function saveToScreen(event) {
-  // event.preventDefault();
-  var storedAppt = localStorage.getItem("appt");
+function saveToScreen() {
+  
+var storedAppt = localStorage.getItem("appt");
 
   if (input !== null) {
     inputText = JSON.parse(storedAppt);
-    input.text = inputText
+    input.textContent = inputText
   }
 }
+
