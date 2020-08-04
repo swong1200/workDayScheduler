@@ -24,17 +24,28 @@ for (var i = 0; i < timeSlot.length; i++) {
   newRow.addClass("row");
   // Time section of row
   var timeBlock = $("<div>");
-  timeBlock.addClass("col-sm-2 time-block");
+  timeBlock.addClass("col-sm-1 hour time-block");
   timeBlock.text(timeSlot[i]);
   // Input Section of row
   var input = $("<input>");
-  input.addClass("col-lg-9 hour");
+  input.addClass("col-lg-10 input");
   input.attr("data-value", timeSlot[i]);
   // Button section of row
-  var btn = $("<button>");
+  var btn = $("<button>", {
+    type: "button",
+    value: timeSlot[i],
+    on: {
+      click: function saveToLocal() {
+        var el = $("input[data-value='" + this.value + "']");
+        if (el) {
+          var inputText = el.val();
+          localStorage.setItem("appt", JSON.stringify(inputText));
+          saveToScreen();
+        }
+      },
+    },
+  });
   btn.addClass("col-sm-1 saveBtn");
-  btn.attr("data-value", timeSlot[i])
-  btn.text("Save");
   // Add sections to row
   newRow.append(timeBlock);
   newRow.append(input);
@@ -43,29 +54,27 @@ for (var i = 0; i < timeSlot.length; i++) {
   schedule.append(newRow);
 }
 
-
 function rowColor() {
   var hourCurrent = moment().format("hA");
-  var current = $("input").attr("data-value")
-  var allRows = $("input")
+  var current = $("input").attr("data-value");
+  var allRows = $("input");
   if (hourCurrent > current) {
     allRows.addClass("past");
-  } else if (hourCurrent < current){
-    allRows.addClass("future")
+  } else if (hourCurrent < current) {
+    allRows.addClass("future");
   } else {
-    allRows.addClass("present")
+    allRows.addClass("present");
   }
 }
-rowColor()
+rowColor();
 
-$("button").click(function(event) {
-  event.preventDefault();
 
-  var appointment = input.text;
-  var inputData = input.attr("data-value");
-  var buttonData = btn.attr("data-value");
+function saveToScreen(event) {
+  // event.preventDefault();
+  var storedAppt = localStorage.getItem("appt");
 
-  if (inputData === buttonData){
-    localStorage.setItem("input", appointment)
+  if (input !== null) {
+    inputText = JSON.parse(storedAppt);
+    input.text = inputText
   }
-});
+}
